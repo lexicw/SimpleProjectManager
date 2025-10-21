@@ -2,6 +2,7 @@
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl.EF;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SimpleProjectManager.Module.BusinessObjects
 {
@@ -42,6 +43,9 @@ namespace SimpleProjectManager.Module.BusinessObjects
         [ImageEditor(ListViewImageEditorCustomHeight = 75, DetailViewImageEditorFixedHeight = 150)]
 
         public virtual MediaDataObject Photo { get; set; }
+
+        [Timestamp]
+        public virtual byte[] RowVersion { get; set; }
 
     }
 }

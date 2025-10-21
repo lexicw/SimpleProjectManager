@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleProjectManager.Module.BusinessObjects;
 
@@ -11,9 +12,11 @@ using SimpleProjectManager.Module.BusinessObjects;
 namespace SimpleProjectManager.Module.Migrations
 {
     [DbContext(typeof(SimpleProjectManagerEFCoreDbContext))]
-    partial class SimpleProjectManagerEFCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251021153647_AddTimestampFieldToCustomer")]
+    partial class AddTimestampFieldToCustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
