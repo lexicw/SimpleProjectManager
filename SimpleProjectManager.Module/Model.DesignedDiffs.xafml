@@ -1,8 +1,27 @@
-﻿<?xml version="1.0" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Title="SimpleProjectManager">
   <Options>
     <LayoutManagerOptions RequiredFieldMark="*" />
   </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="23.2.4.0" IsNewNode="True" />
+  </SchemaModules>
   <Views>
+    <ListView Id="Customer_ListView">
+      <Columns>
+        <ColumnInfo Id="FirstName" SortIndex="-1" SortOrder="None" />
+      </Columns>
+      <Sorting Index="">
+        <SortProperty Id="IDSort" Direction="Descending" PropertyName="id" Index="0" IsNewNode="True" />
+      </Sorting>
+    </ListView>
+    <ListView Id="Message_ListView" AllowEdit="False" AllowLink="False" AllowUnlink="False">
+      <Columns>
+        <ColumnInfo Id="Subject" SortIndex="-1" SortOrder="None" />
+      </Columns>
+      <Sorting>
+        <SortProperty Id="CreatedOnSort" PropertyName="id" Direction="Descending" Index="1" IsNewNode="True" />
+      </Sorting>
+    </ListView>
   </Views>
 </Application>

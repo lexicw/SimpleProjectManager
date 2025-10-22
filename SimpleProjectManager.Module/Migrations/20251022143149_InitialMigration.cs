@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SimpleProjectManager.Module.Migrations
 {
     /// <inheritdoc />
-    public partial class MyInitialMigrationName : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -121,17 +121,19 @@ namespace SimpleProjectManager.Module.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Company = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhotoID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    PhotoID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.ID);
+                    table.PrimaryKey("PK_Customers", x => x.id);
                     table.ForeignKey(
                         name: "FK_Customers_MediaDataObject_PhotoID",
                         column: x => x.PhotoID,
@@ -143,17 +145,17 @@ namespace SimpleProjectManager.Module.Migrations
                 name: "CustomerTestimonial",
                 columns: table => new
                 {
-                    CustomersID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Customersid = table.Column<int>(type: "int", nullable: false),
                     TestimonialsID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerTestimonial", x => new { x.CustomersID, x.TestimonialsID });
+                    table.PrimaryKey("PK_CustomerTestimonial", x => new { x.Customersid, x.TestimonialsID });
                     table.ForeignKey(
-                        name: "FK_CustomerTestimonial_Customers_CustomersID",
-                        column: x => x.CustomersID,
+                        name: "FK_CustomerTestimonial_Customers_Customersid",
+                        column: x => x.Customersid,
                         principalTable: "Customers",
-                        principalColumn: "ID",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CustomerTestimonial_Testimonials_TestimonialsID",

@@ -1,7 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application>
   <NavigationItems NavigationStyle="Accordion">
+    <Items>
+      <Item Id="Default">
+        <Items>
+          <Item Id="Message_ListView" ImageName="Glyph_Mail" />
+        </Items>
+      </Item>
+      <Item Id="Marketing">
+        <Items>
+          <Item Id="Messages" Caption="Messages" ViewId="Message_ListView" ImageName="Glyph_Mail" IsNewNode="True" />
+        </Items>
+      </Item>
+    </Items>
   </NavigationItems>
-  <Views DefaultListEditor="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor">
-  </Views>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="23.2.4.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views DefaultListEditor="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor" />
 </Application>

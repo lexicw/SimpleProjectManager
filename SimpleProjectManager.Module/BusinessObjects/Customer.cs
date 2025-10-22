@@ -1,17 +1,26 @@
-﻿using DevExpress.ExpressApp.DC;
+﻿using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.DC;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl.EF;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Security.AccessControl;
 
 namespace SimpleProjectManager.Module.BusinessObjects
 {
     // Use this attribute to place a navigation item that corresponds to the entity class in the specified navigation group.
+    [DefaultClassOptions]
     [NavigationItem("Marketing")]
 
     // Inherit your entity classes from the BaseObject class to support CRUD operations for the declared objects automatically.
-    public class Customer : BaseObject
+    public class Customer : IXafEntityObject, IObjectSpaceLink
     {
+        protected IObjectSpace ObjectSpace;
+
+        [System.ComponentModel.DataAnnotations.Key]
+        [Browsable(false)]
+        public virtual int id { get; set; }
         public virtual String FirstName { get; set; }
 
         public virtual String LastName { get; set; }
@@ -46,6 +55,33 @@ namespace SimpleProjectManager.Module.BusinessObjects
 
         [Timestamp]
         public virtual byte[] RowVersion { get; set; }
+
+        public virtual MessageStatuses Status { get; set; }
+
+        public enum MessageStatuses
+        {
+            New = 0,
+            Pending = 1,
+            [XafDisplayName("Awaiting Response")]
+            Waiting = 2
+        }
+
+        public void OnSaving()
+        {
+
+        }
+
+        public void OnCreated() 
+        {
+        }
+
+        public void OnLoaded() { }
+
+        IObjectSpace IObjectSpaceLink.ObjectSpace
+        {
+            get => ObjectSpace;
+            set => ObjectSpace = value;
+        }
 
     }
 }

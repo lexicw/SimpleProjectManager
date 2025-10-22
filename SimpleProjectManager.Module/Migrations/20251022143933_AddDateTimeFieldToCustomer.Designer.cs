@@ -12,8 +12,8 @@ using SimpleProjectManager.Module.BusinessObjects;
 namespace SimpleProjectManager.Module.Migrations
 {
     [DbContext(typeof(SimpleProjectManagerEFCoreDbContext))]
-    [Migration("20251021130011_MyInitialMigrationName")]
-    partial class MyInitialMigrationName
+    [Migration("20251022143933_AddDateTimeFieldToCustomer")]
+    partial class AddDateTimeFieldToCustomer
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,13 +30,13 @@ namespace SimpleProjectManager.Module.Migrations
 
             modelBuilder.Entity("CustomerTestimonial", b =>
                 {
-                    b.Property<Guid>("CustomersID")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Customersid")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("TestimonialsID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("CustomersID", "TestimonialsID");
+                    b.HasKey("Customersid", "TestimonialsID");
 
                     b.HasIndex("TestimonialsID");
 
@@ -78,9 +78,14 @@ namespace SimpleProjectManager.Module.Migrations
 
             modelBuilder.Entity("SimpleProjectManager.Module.BusinessObjects.Customer", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<DateTime>("Added")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Company")
                         .HasColumnType("nvarchar(max)");
@@ -100,7 +105,12 @@ namespace SimpleProjectManager.Module.Migrations
                     b.Property<Guid?>("PhotoID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ID");
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("id");
 
                     b.HasIndex("PhotoID");
 
@@ -214,7 +224,7 @@ namespace SimpleProjectManager.Module.Migrations
                 {
                     b.HasOne("SimpleProjectManager.Module.BusinessObjects.Customer", null)
                         .WithMany()
-                        .HasForeignKey("CustomersID")
+                        .HasForeignKey("Customersid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

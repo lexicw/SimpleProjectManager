@@ -5,24 +5,24 @@
 namespace SimpleProjectManager.Module.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTimestampFieldToCustomer : Migration
+    public partial class AddMessageStatus : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<byte[]>(
-                name: "RowVersion",
+            migrationBuilder.AddColumn<int>(
+                name: "Status",
                 table: "Customers",
-                type: "rowversion",
-                rowVersion: true,
-                nullable: true);
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "RowVersion",
+                name: "Status",
                 table: "Customers");
         }
     }
