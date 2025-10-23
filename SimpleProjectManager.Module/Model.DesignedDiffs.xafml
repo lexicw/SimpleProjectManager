@@ -15,6 +15,26 @@
         <SortProperty Id="IDSort" Direction="Descending" PropertyName="id" Index="0" IsNewNode="True" />
       </Sorting>
     </ListView>
+    <DetailView Id="Message_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="Message" RelativeSize="100">
+              <LayoutGroup Id="Message_col1" RelativeSize="49.921996879875195">
+                <LayoutItem Id="Subject" RelativeSize="5.3156146179401995" />
+                <LayoutItem Id="Email" RelativeSize="3.9867109634551494" />
+                <LayoutItem Id="Company" RelativeSize="90.69767441860465" />
+              </LayoutGroup>
+              <LayoutGroup Id="Message_col2" RelativeSize="50.078003120124805">
+                <LayoutItem Id="Status" RelativeSize="5.3156146179401995" />
+                <LayoutItem Id="CreatedOn" RelativeSize="94.6843853820598" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="RowVersion_Group" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <ListView Id="Message_ListView" AllowEdit="False" AllowLink="False" AllowUnlink="False">
       <Columns>
         <ColumnInfo Id="Subject" SortIndex="-1" SortOrder="None" />

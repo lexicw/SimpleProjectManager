@@ -42,6 +42,9 @@ namespace SimpleProjectManager.Module.BusinessObjects
 
         public virtual DateTime CreatedOn { get; set; }
 
+        [StringLength(4096)]
+        public virtual string MessageBody { get; set; }
+
         public enum MessageStatuses
         {
             New = 0,

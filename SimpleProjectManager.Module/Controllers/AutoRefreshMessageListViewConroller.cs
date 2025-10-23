@@ -92,7 +92,6 @@ namespace SimpleProjectManager.Module.Controllers
                 }
                 catch
                 {
-                    // ignore transient errors
                 }
                 finally
                 {
@@ -109,7 +108,6 @@ namespace SimpleProjectManager.Module.Controllers
             {
                 var os = View.ObjectSpace;
 
-                // If only value-changes happened (no insert/delete), do a cheap refresh to preserve selection
                 if (!countChanged && rvChanged)
                 {
                     if (os is EFCoreObjectSpace efosUpd)
@@ -120,7 +118,6 @@ namespace SimpleProjectManager.Module.Controllers
                     return;
                 }
 
-                // Insert/Delete → full reload, but preserve selection/focus
                 var selectedKeys = View.SelectedObjects.Cast<object>()
                     .Select(o => os.GetKeyValue(o))
                     .ToList();
@@ -132,47 +129,9 @@ namespace SimpleProjectManager.Module.Controllers
 
                 lv.CollectionSource.Reload();
                 View.Refresh();
-
-                void Restore()
-                {
-                    try
-                    {
-                        View.SelectedObjects.Clear();
-                        foreach (var key in selectedKeys)
-                        {
-                            try
-                            {
-                                var obj = os.GetObjectByKey(View.ObjectTypeInfo.Type, key);
-                                if (obj != null) View.SelectedObjects.Add(obj);
-                            }
-                            catch { }
-                        }
-
-                        if (focusedKey != null)
-                        {
-                            try
-                            {
-                                var current = os.GetObjectByKey(View.ObjectTypeInfo.Type, focusedKey);
-                                if (current != null) View.CurrentObject = current;
-                            }
-                            catch { }
-                        }
-                    }
-                    catch { }
-                }
-
-                if (_uiContext != null)
-                {
-                    _uiContext.Post(_ => Restore(), null);
-                }
-                else
-                {
-                    Restore();
-                }
             }
             catch
             {
-                // ignore transient issues
             }
         }
 

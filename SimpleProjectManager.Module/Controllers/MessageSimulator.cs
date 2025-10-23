@@ -40,7 +40,7 @@ namespace SimpleProjectManager.Blazor.Server.Controllers
             "bruce.wayne@wayne.com","charlie@wonka.com","claire.redfield@umbrella.com",
             "gavin@hooli.com","samir@initech.com","chell@aperture.com","frank@soylent.com",
             "miles.dyson@cyberdyne.com","olivia.dunham@massivedynamic.com","rachel.tyrell@tyrell.com",
-            "jane.doe@vehementcapital.com","malcolm.reynolds@bluesun.com","austin.powers@virtucon.com",
+            "jane.doe@vehementcapital.com","malcolm.reynolds@bluesun.com","austin.powell@virtucon.com",
             "harry.osborn@oscorp.com","lex.luthor@lexcorp.com","desmond.miles@abstergo.com",
             "gordon.freeman@blackmesa.com","wile.e.coyote@acme.com"
         };
