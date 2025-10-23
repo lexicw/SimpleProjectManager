@@ -64,6 +64,7 @@ namespace SimpleProjectManager.Blazor.Server.Controllers
                         msg.Company = Companies[rand.Next(Companies.Length)];
                         msg.Email = Emails[rand.Next(Emails.Length)];
                         msg.Status = Message.MessageStatuses.New;
+                        msg.CreatedOn = DateTime.Now;
 
                         os.CommitChanges(); // Persist the insert
                     }

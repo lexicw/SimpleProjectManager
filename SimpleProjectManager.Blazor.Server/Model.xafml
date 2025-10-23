@@ -18,6 +18,6 @@
     <SchemaModule Name="SystemModule" Version="23.2.4.0" IsNewNode="True" />
   </SchemaModules>
   <Views DefaultListEditor="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor">
-    <ListView Id="Message_ListView" DataAccessMode="Server" PageSize="20" ShowSelectionColumn="False" />
+    <ListView Id="Message_ListView" DataAccessMode="Server" PageSize="20" ShowSelectionColumn="True" />
   </Views>
 </Application>
