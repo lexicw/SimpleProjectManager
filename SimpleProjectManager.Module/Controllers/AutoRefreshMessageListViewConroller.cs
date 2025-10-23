@@ -50,21 +50,21 @@ namespace SimpleProjectManager.Module.Controllers
                     {
                         var db = efProbe.DbContext;
 
-                        // Flip Status to Attention (3) for items older than 20 minutes
-                        //var cutoff = DateTime.Now.AddMinutes(-20);
-                        //var attentionStatus = db.Set<BusinessObjects.Message>()
-                        //               .Where(m => m.Status != BusinessObjects.Message.MessageStatuses.Attention
-                        //                        && m.CreatedOn <= cutoff)
-                        //               .ToList();
+                        // 10 Minutes ago cutoff for "Attention" status
+                        var cutoff = DateTime.Now.AddMinutes(-2);
+                        var attentionStatus = db.Set<BusinessObjects.Message>()
+                                       .Where(m => m.Status != BusinessObjects.Message.MessageStatuses.Attention
+                                                && m.CreatedOn <= cutoff)
+                                       .ToList();
 
-                        //if (attentionStatus.Count > 0)
-                        //{
-                        //    foreach (var m in attentionStatus)
-                        //        m.Status = BusinessObjects.Message.MessageStatuses.Attention;
+                        if (attentionStatus.Count > 0)
+                        {
+                            foreach (var m in attentionStatus)
+                                m.Status = BusinessObjects.Message.MessageStatuses.Attention;
 
-                        //    db.SaveChanges();
-                        //    didUpdates = true;
-                        //}
+                            db.SaveChanges();
+                            didUpdates = true;
+                        }
 
                         // Probe AFTER possible updates
                         var countNow = db.Set<BusinessObjects.Message>().AsNoTracking().LongCount();

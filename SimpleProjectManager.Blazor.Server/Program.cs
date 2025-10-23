@@ -2,8 +2,13 @@
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Blazor.DesignTime;
 using DevExpress.ExpressApp.Blazor.Services;
+using DevExpress.ExpressApp.Core;
 using DevExpress.ExpressApp.Design;
+using DevExpress.ExpressApp.EFCore;
 using DevExpress.ExpressApp.Utils;
+using Microsoft.Extensions.Hosting;
+using SimpleProjectManager.Blazor.Server.Controllers;
+using SimpleProjectManager.Module.BusinessObjects;
 
 namespace SimpleProjectManager.Blazor.Server;
 
@@ -33,6 +38,19 @@ public class Program : IDesignTimeApplicationFactory {
                 }
             }
             else {
+                // Message Simulator
+                using (var scope = host.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    var scopeFactory = services.GetRequiredService<IServiceScopeFactory>();
+                    var lifetime = services.GetRequiredService<IHostApplicationLifetime>();
+
+                    // fire-and-forget; it will stop when the app stops
+                    _ = MessageSimulator.StartAsync(scopeFactory, lifetime.ApplicationStopping);
+                    Console.WriteLine("✅ MessageSimulator (ObjectSpace, per-iteration scope) started…");
+                }
+                // END SIMULATOR
+
                 host.Run();
             }
         }
