@@ -4,7 +4,7 @@
     <LayoutManagerOptions RequiredFieldMark="*" />
   </Options>
   <SchemaModules>
-    <SchemaModule Name="SystemModule" Version="23.2.4.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="25.1.6.0" IsNewNode="True" />
   </SchemaModules>
   <Views>
     <ListView Id="Customer_ListView">
@@ -35,7 +35,7 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="Message_ListView" AllowEdit="False" AllowLink="False" AllowUnlink="False">
+    <ListView Id="Message_ListView" AllowEdit="False" AllowLink="False" AllowUnlink="False" DataAccessMode="Client" FreezeColumnIndices="False">
       <Columns>
         <ColumnInfo Id="Subject" SortIndex="-1" SortOrder="None" />
       </Columns>

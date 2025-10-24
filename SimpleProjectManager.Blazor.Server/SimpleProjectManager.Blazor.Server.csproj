@@ -17,11 +17,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Drawing.Skia" Version="23.2.4" />
-    <PackageReference Include="DevExpress.ExpressApp.Blazor" Version="23.2.4" />
-    <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="23.2.4" />
-    <PackageReference Include="DevExpress.ExpressApp.Validation.Blazor" Version="23.2.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+    <PackageReference Include="DevExpress.Drawing.Skia" Version="25.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Blazor" Version="25.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Blazor.All" Version="25.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="25.1.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="DevExpress.ExpressApp.Validation.Blazor" Version="25.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
