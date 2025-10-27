@@ -1,7 +1,9 @@
 ﻿using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.Blazor.Editors;
 using DevExpress.ExpressApp.EFCore;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,7 +33,11 @@ namespace SimpleProjectManager.Module.Controllers
             base.OnActivated();
             _uiContext = SynchronizationContext.Current;
 
-            _timer = new System.Timers.Timer(IntervalMs) { AutoReset = true, Enabled = true };
+            _timer = new System.Timers.Timer(IntervalMs)
+            {
+                AutoReset = true,
+                Enabled = true
+            };
             _timer.Elapsed += Timer_Elapsed;
         }
 
@@ -42,6 +48,7 @@ namespace SimpleProjectManager.Module.Controllers
             Task.Run(() =>
             {
                 bool didUpdates = false;
+                List<object> changedKeys = null;
 
                 try
                 {
@@ -50,12 +57,14 @@ namespace SimpleProjectManager.Module.Controllers
                     {
                         var db = efProbe.DbContext;
 
-                        // 10 Minutes ago cutoff for "Attention" status
+                        // 2-minute cutoff in this sample
                         var cutoff = DateTime.Now.AddMinutes(-2);
+
+                        // Track entities we need to update
                         var attentionStatus = db.Set<BusinessObjects.Message>()
-                                       .Where(m => m.Status != BusinessObjects.Message.MessageStatuses.Attention
-                                                && m.CreatedOn <= cutoff)
-                                       .ToList();
+                            .Where(m => m.Status != BusinessObjects.Message.MessageStatuses.Attention
+                                     && m.CreatedOn <= cutoff)
+                            .ToList();
 
                         if (attentionStatus.Count > 0)
                         {
@@ -64,6 +73,13 @@ namespace SimpleProjectManager.Module.Controllers
 
                             db.SaveChanges();
                             didUpdates = true;
+
+                            // Capture primary keys of changed rows
+                            changedKeys = attentionStatus
+                                .Select(m => (object)osProbe.GetKeyValue(m))
+                                .Where(k => k != null)
+                                .Distinct()
+                                .ToList();
                         }
 
                         // Probe AFTER possible updates
@@ -74,24 +90,25 @@ namespace SimpleProjectManager.Module.Controllers
                                          .Select(c => EF.Property<byte[]>(c, "RowVersion"))
                                          .FirstOrDefault();
 
-                        bool countChanged = countNow != _lastCount;                          // insert/delete
+                        bool countChanged = countNow != _lastCount;                            // insert/delete
                         bool rvChanged = !RowVersionEquals(maxRvNow, _lastMaxRv) || didUpdates; // updates or we changed rows
 
-                        // Always baseline (prevents stale baselines blocking refresh later)
+                        // Baseline
                         _lastCount = countNow;
                         _lastMaxRv = maxRvNow;
 
                         if (countChanged || rvChanged)
                         {
                             if (_uiContext != null)
-                                _uiContext.Post(_ => ApplyRefresh(countChanged, rvChanged), null);
+                                _uiContext.Post(_ => ApplyRefresh(countChanged, rvChanged, changedKeys), null);
                             else
-                                ApplyRefresh(countChanged, rvChanged);
+                                ApplyRefresh(countChanged, rvChanged, changedKeys);
                         }
                     }
                 }
                 catch
                 {
+                    // log if needed
                 }
                 finally
                 {
@@ -100,7 +117,7 @@ namespace SimpleProjectManager.Module.Controllers
             });
         }
 
-        private void ApplyRefresh(bool countChanged, bool rvChanged)
+        private void ApplyRefresh(bool countChanged, bool rvChanged, IList<object> changedKeys = null)
         {
             if (View is not ListView lv || View.ObjectSpace == null) return;
 
@@ -108,30 +125,83 @@ namespace SimpleProjectManager.Module.Controllers
             {
                 var os = View.ObjectSpace;
 
+                // Lightweight path: values changed but no add/remove -> keep selection
                 if (!countChanged && rvChanged)
                 {
+                    // Clear EF tracking before reloading objects
                     if (os is EFCoreObjectSpace efosUpd)
                         efosUpd.DbContext.ChangeTracker.Clear();
 
-                    os.Refresh();
-                    View.Refresh();
+                    if (changedKeys != null && changedKeys.Count > 0)
+                    {
+                        // Map keys to current instances in THIS ObjectSpace, then reload those objects in place
+                        var toReload = changedKeys
+                            .Select(k => os.GetObjectByKey(lv.ObjectTypeInfo.Type, k))
+                            .Where(o => o != null)
+                            .ToList();
+
+                        foreach (var obj in toReload)
+                            os.ReloadObject(obj); // keeps instances -> preserves selection
+                    }
+                    else
+                    {
+                        // Fallback if we don't know which changed; still avoid reloading the CollectionSource
+                        os.Refresh();
+                    }
+
+                    View.Refresh(); // repaint; instances unchanged so selection & focus stay
                     return;
                 }
 
+                // === Full reload path (add/remove occurred) ===
+
+                // 1) Capture selection & focused object keys (before reload)
                 var selectedKeys = View.SelectedObjects.Cast<object>()
                     .Select(o => os.GetKeyValue(o))
+                    .Where(k => k != null)
                     .ToList();
 
-                object focusedKey = View.CurrentObject != null ? os.GetKeyValue(View.CurrentObject) : null;
+                var focusedKey = View.CurrentObject != null ? os.GetKeyValue(View.CurrentObject) : null;
 
+                // 2) Clear EF tracking and reload the collection
                 if (os is EFCoreObjectSpace efos)
                     efos.DbContext.ChangeTracker.Clear();
 
+                if (lv.Editor is DxGridListEditor ge)
+                {
+                    ge.RestoreFocusedObject = true;
+                    // If your version has it, you can also enable:
+                    // ge.RestoreSelectedObjects = true;
+                }
+
                 lv.CollectionSource.Reload();
                 View.Refresh();
+
+                // 3) Restore selection & focus by keys
+                if (lv.Editor is DxGridListEditor gridEditor)
+                {
+                    var selectedObjs = selectedKeys
+                        .Select(k => os.GetObjectByKey(lv.ObjectTypeInfo.Type, k))
+                        .Where(o => o != null)
+                        .ToList();
+
+                    //gridEditor.UnselectAll();
+
+                    // Portable re-select
+                    foreach (var o in selectedObjs)
+                        gridEditor.SelectObject(o);
+
+                    if (focusedKey != null)
+                    {
+                        var focusedObj = os.GetObjectByKey(lv.ObjectTypeInfo.Type, focusedKey);
+                        if (focusedObj != null)
+                            View.CurrentObject = focusedObj;
+                    }
+                }
             }
             catch
             {
+                // log if needed
             }
         }
 
@@ -139,7 +209,8 @@ namespace SimpleProjectManager.Module.Controllers
         {
             if (ReferenceEquals(a, b)) return true;
             if (a == null || b == null || a.Length != b.Length) return false;
-            for (int i = 0; i < a.Length; i++) if (a[i] != b[i]) return false;
+            for (int i = 0; i < a.Length; i++)
+                if (a[i] != b[i]) return false;
             return true;
         }
 
