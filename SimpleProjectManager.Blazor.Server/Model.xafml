@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application>
+  <BOModel>
+    <Class Name="SimpleProjectManager.Module.BusinessObjects.Message">
+      <OwnMembers>
+        <Member Name="MessageBody" PropertyEditorType="SimpleProjectManager.Blazor.Server.Editors.HtmlEditorPropertyEditor" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
   <NavigationItems NavigationStyle="Accordion">
     <Items>
       <Item Id="Default">
@@ -18,6 +25,27 @@
     <SchemaModule Name="SystemModule" Version="25.1.6.0" IsNewNode="True" />
   </SchemaModules>
   <Views DefaultListEditor="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor">
+    <DetailView Id="Message_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Message" RelativeSize="21.46189735614308">
+              <LayoutGroup Id="Message_col1" RelativeSize="49.93006993006993">
+                <LayoutItem Id="Subject" RelativeSize="36.734693877551024" />
+                <LayoutItem Id="Email" RelativeSize="26.53061224489796" />
+                <LayoutItem Id="Company" RelativeSize="36.734693877551024" />
+              </LayoutGroup>
+              <LayoutGroup Id="Message_col2" RelativeSize="50.06993006993007">
+                <LayoutItem Id="Status" RelativeSize="36.734693877551024" />
+                <LayoutItem Id="CreatedOn" RelativeSize="63.265306122448976" />
+                <LayoutItem Id="MessageBody" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutItem Id="MessageBody" ViewItem="MessageBody" Index="1" RelativeSize="78.53810264385692" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <ListView Id="Message_ListView" DataAccessMode="Server" PageSize="20" ShowSelectionColumn="True" InlineEditMode="PopupEditForm" VirtualScrollingEnabled="True" FreezeColumnIndices="False" />
   </Views>
 </Application>

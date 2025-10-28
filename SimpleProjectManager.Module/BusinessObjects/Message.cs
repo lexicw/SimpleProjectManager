@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.Xpo;
 using System.ComponentModel.DataAnnotations.Schema;
+using DevExpress.ExpressApp.Editors;
 
 namespace SimpleProjectManager.Module.BusinessObjects
 {
@@ -42,7 +43,7 @@ namespace SimpleProjectManager.Module.BusinessObjects
 
         public virtual DateTime CreatedOn { get; set; }
 
-        [StringLength(4096)]
+        [EditorAlias("HtmlEmailEditor")]
         public virtual string MessageBody { get; set; }
 
         public enum MessageStatuses
