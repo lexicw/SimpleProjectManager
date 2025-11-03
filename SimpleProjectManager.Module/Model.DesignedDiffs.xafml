@@ -38,6 +38,7 @@
     <ListView Id="Message_ListView" AllowEdit="False" AllowLink="False" AllowUnlink="False" DataAccessMode="Client" FreezeColumnIndices="False">
       <Columns>
         <ColumnInfo Id="Subject" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="MessageBody" Removed="True" />
       </Columns>
       <Sorting>
         <SortProperty Id="CreatedOnSort" PropertyName="id" Direction="Descending" Index="1" IsNewNode="True" />
