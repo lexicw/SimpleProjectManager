@@ -63,7 +63,7 @@ namespace SimpleProjectManager.Module.Controllers
                         // Track entities we need to update
                         var attentionStatus = db.Set<BusinessObjects.Message>()
                             .Where(m => m.Status != BusinessObjects.Message.MessageStatuses.Attention
-                                     && m.CreatedOn <= cutoff)
+                                     && m.CreatedOn <= cutoff && m.Status == BusinessObjects.Message.MessageStatuses.New)
                             .ToList();
 
                         if (attentionStatus.Count > 0)
