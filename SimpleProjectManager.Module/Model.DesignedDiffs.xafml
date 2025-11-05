@@ -31,7 +31,10 @@
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
-          <LayoutGroup Id="RowVersion_Group" Removed="True" />
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="AssignedTo" Removed="True" />
+            <LayoutGroup Id="RowVersion" Removed="True" />
+          </TabbedGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>

@@ -46,6 +46,8 @@ namespace SimpleProjectManager.Module.BusinessObjects
         [EditorAlias("HtmlEmailEditor")]
         public virtual string MessageBody { get; set; }
 
+        public virtual IList<Employee> AssignedTo { get; set; } = new ObservableCollection<Employee>();
+
         public enum MessageStatuses
         {
             New = 0,

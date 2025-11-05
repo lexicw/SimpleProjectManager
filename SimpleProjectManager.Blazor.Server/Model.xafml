@@ -3,6 +3,7 @@
   <BOModel>
     <Class Name="SimpleProjectManager.Module.BusinessObjects.Message">
       <OwnMembers>
+        <Member Name="AssignedTo" PropertyEditorType="DevExpress.ExpressApp.Blazor.Editors.TagBoxListPropertyEditor" />
         <Member Name="MessageBody" PropertyEditorType="SimpleProjectManager.Blazor.Server.Editors.HtmlEditorPropertyEditor" />
       </OwnMembers>
     </Class>
@@ -28,21 +29,28 @@
     <DetailView Id="Message_DetailView">
       <Layout>
         <LayoutGroup Id="Main">
-          <LayoutGroup Id="SimpleEditors">
-            <LayoutGroup Id="Message" RelativeSize="21.46189735614308">
-              <LayoutGroup Id="Message_col1" RelativeSize="49.93006993006993">
-                <LayoutItem Id="Subject" RelativeSize="36.734693877551024" />
-                <LayoutItem Id="Email" RelativeSize="26.53061224489796" />
-                <LayoutItem Id="Company" RelativeSize="36.734693877551024" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="34.10596026490066">
+            <LayoutGroup Id="Message" RelativeSize="85.4368932038835">
+              <LayoutGroup Id="Message_col1" RelativeSize="49.84472049689441">
+                <LayoutItem Id="Subject" RelativeSize="22.377622377622377" />
+                <LayoutItem Id="Email" RelativeSize="16.783216783216783" />
+                <LayoutItem Id="Company" RelativeSize="60.83916083916084" />
               </LayoutGroup>
-              <LayoutGroup Id="Message_col2" RelativeSize="50.06993006993007">
-                <LayoutItem Id="Status" RelativeSize="36.734693877551024" />
-                <LayoutItem Id="CreatedOn" RelativeSize="63.265306122448976" />
+              <LayoutGroup Id="Message_col2" RelativeSize="50.15527950310559">
+                <LayoutItem Id="Status" RelativeSize="22.377622377622377" />
+                <LayoutItem Id="CreatedOn" RelativeSize="16.783216783216783" />
+                <LayoutItem Id="AssignedTo" ViewItem="AssignedTo" Index="2" RelativeSize="60.83916083916084" IsNewNode="True" />
                 <LayoutItem Id="MessageBody" Removed="True" />
               </LayoutGroup>
             </LayoutGroup>
-            <LayoutItem Id="MessageBody" ViewItem="MessageBody" Index="1" RelativeSize="78.53810264385692" IsNewNode="True" />
+            <LayoutItem Id="MessageBody" ViewItem="MessageBody" Index="1" RelativeSize="14.563106796116505" IsNewNode="True" />
           </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="65.89403973509934">
+            <LayoutGroup Id="RowVersion" RelativeSize="100">
+              <LayoutItem Id="RowVersion" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="AssignedTo" Removed="True" />
+          </TabbedGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>
