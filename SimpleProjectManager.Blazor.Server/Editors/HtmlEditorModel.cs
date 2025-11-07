@@ -1,5 +1,4 @@
-﻿// MySolution.Blazor.Server/Editors/HtmlEditorModel.cs
-using DevExpress.ExpressApp.Blazor.Components.Models;
+﻿using DevExpress.ExpressApp.Blazor.Components.Models;
 using Microsoft.AspNetCore.Components;
 using DevExpress.Blazor;
 

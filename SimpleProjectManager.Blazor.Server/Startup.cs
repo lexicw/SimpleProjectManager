@@ -2,6 +2,7 @@
 using DevExpress.ExpressApp.Blazor.ApplicationBuilder;
 using DevExpress.ExpressApp.Blazor.Services;
 using DevExpress.Persistent.Base;
+using DevExpress.Persistent.BaseImpl.EF;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,10 @@ public class Startup {
                 })
                 .Add<SimpleProjectManager.Module.SimpleProjectManagerModule>()
             	.Add<SimpleProjectManagerBlazorModule>();
+            builder.Modules
+              .AddOffice(options => {
+                  options.RichTextMailMergeDataType = typeof(RichTextMailMergeData);
+              });
             builder.ObjectSpaceProviders
                 .AddEFCore(options => options.PreFetchReferenceProperties())
                     .WithDbContext<SimpleProjectManager.Module.BusinessObjects.SimpleProjectManagerEFCoreDbContext>((serviceProvider, options) => {

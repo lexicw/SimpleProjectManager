@@ -43,7 +43,7 @@ namespace SimpleProjectManager.Module.BusinessObjects
 
         public virtual DateTime CreatedOn { get; set; }
 
-        [EditorAlias("HtmlEmailEditor")]
+        [EditorAlias(EditorAliases.RichTextPropertyEditor)]
         [FieldSize(FieldSizeAttribute.Unlimited)]
         public virtual string MessageBody { get; set; }
 

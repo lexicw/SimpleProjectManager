@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="Message_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs">
+            <LayoutGroup Id="RowVersion" RelativeSize="100">
+              <LayoutItem Id="RowVersion" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="AssignedTo" Removed="True" />
+          </TabbedGroup>
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Message">
+              <LayoutGroup Id="Message_col2">
+                <LayoutItem Id="MessageBody" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

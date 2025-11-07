@@ -4,7 +4,7 @@
     <Class Name="SimpleProjectManager.Module.BusinessObjects.Message">
       <OwnMembers>
         <Member Name="AssignedTo" PropertyEditorType="DevExpress.ExpressApp.Blazor.Editors.TagBoxListPropertyEditor" />
-        <Member Name="MessageBody" PropertyEditorType="SimpleProjectManager.Blazor.Server.Editors.HtmlEditorPropertyEditor" />
+        <Member Name="MessageBody" PropertyEditorType="DevExpress.ExpressApp.Office.Blazor.Editors.RichTextPropertyEditor" DocumentStorageFormat="Html" />
       </OwnMembers>
     </Class>
   </BOModel>
@@ -40,17 +40,9 @@
                 <LayoutItem Id="Status" RelativeSize="22.377622377622377" />
                 <LayoutItem Id="CreatedOn" RelativeSize="16.783216783216783" />
                 <LayoutItem Id="AssignedTo" ViewItem="AssignedTo" Index="2" RelativeSize="60.83916083916084" IsNewNode="True" />
-                <LayoutItem Id="MessageBody" Removed="True" />
               </LayoutGroup>
             </LayoutGroup>
-            <LayoutItem Id="MessageBody" ViewItem="MessageBody" Index="1" RelativeSize="14.563106796116505" IsNewNode="True" />
           </LayoutGroup>
-          <TabbedGroup Id="Tabs" RelativeSize="65.89403973509934">
-            <LayoutGroup Id="RowVersion" RelativeSize="100">
-              <LayoutItem Id="RowVersion" RelativeSize="100" />
-            </LayoutGroup>
-            <LayoutGroup Id="AssignedTo" Removed="True" />
-          </TabbedGroup>
         </LayoutGroup>
       </Layout>
     </DetailView>

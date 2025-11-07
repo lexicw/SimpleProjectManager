@@ -25,6 +25,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="DevExpress.ExpressApp.Office" Version="25.1.6" />
+    <PackageReference Include="DevExpress.ExpressApp.Office.Blazor" Version="25.1.6" />
     <PackageReference Include="DevExpress.ExpressApp.Validation.Blazor" Version="25.1.6" />
     <PackageReference Include="MailKit" Version="4.14.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
@@ -35,5 +37,13 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleProjectManager.Module\SimpleProjectManager.Module.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="UnusableNodes.xml">
+      <DependentUpon>Model.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes1.xml">
+      <DependentUpon>Model.xafml</DependentUpon>
+    </None>
   </ItemGroup>
 </Project>
