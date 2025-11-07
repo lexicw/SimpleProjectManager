@@ -44,6 +44,7 @@ namespace SimpleProjectManager.Module.BusinessObjects
         public virtual DateTime CreatedOn { get; set; }
 
         [EditorAlias("HtmlEmailEditor")]
+        [FieldSize(FieldSizeAttribute.Unlimited)]
         public virtual string MessageBody { get; set; }
 
         public virtual IList<Employee> AssignedTo { get; set; } = new ObservableCollection<Employee>();
