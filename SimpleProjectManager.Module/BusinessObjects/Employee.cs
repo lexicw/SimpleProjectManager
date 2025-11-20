@@ -2,6 +2,7 @@
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl.EF;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
 
@@ -28,6 +29,8 @@ namespace SimpleProjectManager.Module.BusinessObjects
             this, EmptyEntriesMode.RemoveDelimiterWhenEntryIsEmpty);
             }
         }
+
+        public virtual IList<Message> AssignedMessages { get; set; } = new ObservableCollection<Message>();
 
         public void OnSaving()
         {

@@ -9,6 +9,7 @@
     <Class Name="SimpleProjectManager.Module.BusinessObjects.Message">
       <OwnMembers>
         <Member Name="AssignedTo" PropertyEditorType="DevExpress.ExpressApp.Blazor.Editors.TagBoxListPropertyEditor" />
+        <Member Name="AssignedToList" DisplayFormat="" />
         <Member Name="MessageBody" PropertyEditorType="DevExpress.ExpressApp.Office.Blazor.Editors.RichTextPropertyEditor" DocumentStorageFormat="Html" />
       </OwnMembers>
     </Class>
@@ -49,15 +50,16 @@
           <LayoutGroup Id="SimpleEditors" RelativeSize="24.503311258278146">
             <LayoutItem Id="AssignedToChips" ViewItem="AssignedToChips" Index="0" RelativeSize="21.62162162162162" IsNewNode="True" />
             <LayoutGroup Id="Message" RelativeSize="78.37837837837837" Index="1">
-              <LayoutGroup Id="Message_col1" RelativeSize="49.528301886792455">
+              <LayoutGroup Id="Message_col1" RelativeSize="49.45054945054945">
                 <LayoutItem Id="Subject" RelativeSize="36.36363636363637" />
                 <LayoutItem Id="Email" RelativeSize="27.272727272727273" />
                 <LayoutItem Id="Company" RelativeSize="36.36363636363637" />
               </LayoutGroup>
-              <LayoutGroup Id="Message_col2" RelativeSize="50.471698113207545">
+              <LayoutGroup Id="Message_col2" RelativeSize="50.54945054945055">
                 <LayoutItem Id="Status" RelativeSize="36.36363636363637" />
                 <LayoutItem Id="CreatedOn" RelativeSize="27.272727272727273" />
                 <LayoutItem Id="AssignedTo" ViewItem="AssignedTo" Index="2" RelativeSize="36.36363636363637" IsNewNode="True" />
+                <LayoutItem Id="AssignedToList" Removed="True" />
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
@@ -65,6 +67,11 @@
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="Message_ListView" DataAccessMode="Server" PageSize="20" ShowSelectionColumn="True" InlineEditMode="PopupEditForm" VirtualScrollingEnabled="True" FreezeColumnIndices="False" />
+    <ListView Id="Message_ListView" DataAccessMode="Server" PageSize="20" ShowSelectionColumn="True" InlineEditMode="PopupEditForm" VirtualScrollingEnabled="True" FreezeColumnIndices="False">
+      <Columns>
+        <ColumnInfo Id="AssignedToList" PropertyEditorType="SimpleProjectManager.Blazor.Server.Editors.HtmlStringPropertyEditor" Caption="Assigned To" />
+        <ColumnInfo Id="AssignedTo" PropertyEditorType="SimpleProjectManager.Blazor.Server.Editors.TagBoxPropertyEditor" Removed="True" />
+      </Columns>
+    </ListView>
   </Views>
 </Application>

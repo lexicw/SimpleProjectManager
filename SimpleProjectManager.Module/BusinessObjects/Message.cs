@@ -15,6 +15,8 @@ using DevExpress.Xpo;
 using System.ComponentModel.DataAnnotations.Schema;
 using DevExpress.ExpressApp.Editors;
 using System.Drawing;
+using static DevExpress.ReportServer.Printing.RemoteDocumentSource;
+using DevExpress.ExpressApp.Model;
 
 namespace SimpleProjectManager.Module.BusinessObjects
 {
@@ -50,6 +52,28 @@ namespace SimpleProjectManager.Module.BusinessObjects
 
         [ImmediatePostData]
         public virtual IList<Employee> AssignedTo { get; set; } = new ObservableCollection<Employee>();
+
+        [NotMapped]
+        [EditorAlias("HtmlStringPropertyEditor")]
+        public string AssignedToList
+        {
+            get
+            {
+                string strAssignedTo = "";
+                foreach (Employee objEmployee in this.AssignedTo)
+                {
+                    var c = objEmployee.Color ?? Color.Gray;
+                    var cssColor = $"#{c.R:X2}{c.G:X2}{c.B:X2}";
+
+                    strAssignedTo += "<span class='employee-color-chip' style='background-color:" + cssColor + "'>" + objEmployee.FirstName[0] + objEmployee.LastName[0] + "</span>";
+                }
+                if (strAssignedTo.EndsWith(", "))
+                {
+                    strAssignedTo = strAssignedTo.Substring(0, strAssignedTo.Length - 2);
+                }
+                return strAssignedTo;
+            }
+        }
 
         public enum MessageStatuses
         {
