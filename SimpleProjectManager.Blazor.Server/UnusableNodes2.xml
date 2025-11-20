@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="Message_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="Assigned To" PropertyEditorType="DevExpress.ExpressApp.Editors.ListPropertyEditor" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

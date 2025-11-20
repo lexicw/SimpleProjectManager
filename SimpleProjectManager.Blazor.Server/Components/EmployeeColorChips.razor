@@ -1,19 +1,17 @@
-﻿@using DevExpress.ExpressApp.Blazor.Editors
-@using Microsoft.AspNetCore.Components
+﻿@using DevExpress.ExpressApp
+@using DevExpress.ExpressApp.Blazor.Editors
 @using SimpleProjectManager.Module.BusinessObjects
 @using System.Drawing
+
+@implements IDisposable
 
 <div class="assigned-to-chips">
     @if (ViewItem?.CurrentObject is Message message)
     {
-        if (message.AssignedTo == null || message.AssignedTo.Count == 0)
-        {
-        }
-        else
+        if (message.AssignedTo != null && message.AssignedTo.Count > 0)
         {
             foreach (var emp in message.AssignedTo)
             {
-                // Handle nullable Color?
                 var c = emp.Color ?? Color.Gray;
                 var cssColor = $"#{c.R:X2}{c.G:X2}{c.B:X2}";
 
@@ -27,4 +25,53 @@
 
 @code {
     [CascadingParameter] public BlazorControlViewItem? ViewItem { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (ViewItem is not null)
+        {
+            ViewItem.CurrentObjectChanged += ViewItem_CurrentObjectChanged;
+            ViewItem.ObjectSpace.ObjectChanged += ObjectSpace_ObjectChanged;
+        }
+    }
+
+    private void ViewItem_CurrentObjectChanged(object? sender, EventArgs e)
+        => InvokeAsync(StateHasChanged);
+
+    private void ObjectSpace_ObjectChanged(object? sender, ObjectChangedEventArgs e)
+    {
+        if (ViewItem?.CurrentObject is not Message message)
+            return;
+
+        // 1) If the current Message itself changed (incl. its relations)
+        if (ReferenceEquals(e.Object, message))
+        {
+            InvokeAsync(StateHasChanged);
+            return;
+        }
+
+        // 2) If an Employee that belongs to AssignedTo changed
+        if (e.Object is Employee emp &&
+            message.AssignedTo != null &&
+            message.AssignedTo.Contains(emp))
+        {
+            InvokeAsync(StateHasChanged);
+            return;
+        }
+
+        // --- If this still doesn't fire, as a brute-force test:
+        // InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        if (ViewItem is not null)
+        {
+            ViewItem.CurrentObjectChanged -= ViewItem_CurrentObjectChanged;
+            if (ViewItem.ObjectSpace is not null)
+                ViewItem.ObjectSpace.ObjectChanged -= ObjectSpace_ObjectChanged;
+        }
+    }
 }

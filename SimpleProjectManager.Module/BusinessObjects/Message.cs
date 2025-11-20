@@ -48,6 +48,7 @@ namespace SimpleProjectManager.Module.BusinessObjects
         [FieldSize(FieldSizeAttribute.Unlimited)]
         public virtual string MessageBody { get; set; }
 
+        [ImmediatePostData]
         public virtual IList<Employee> AssignedTo { get; set; } = new ObservableCollection<Employee>();
 
         public enum MessageStatuses
