@@ -17,6 +17,7 @@ using DevExpress.ExpressApp.Editors;
 using System.Drawing;
 using static DevExpress.ReportServer.Printing.RemoteDocumentSource;
 using DevExpress.ExpressApp.Model;
+using System.Collections.Specialized;
 
 namespace SimpleProjectManager.Module.BusinessObjects
 {
@@ -93,9 +94,20 @@ namespace SimpleProjectManager.Module.BusinessObjects
         public void OnCreated()
         {
             CreatedOn = DateTime.Now;
+            if (AssignedTo is INotifyCollectionChanged coll)
+                coll.CollectionChanged += AssignedToChanged;
         }
 
-        public void OnLoaded() { }
+        public void OnLoaded() 
+        {
+            if (AssignedTo is INotifyCollectionChanged coll)
+                coll.CollectionChanged += AssignedToChanged;
+        }
+
+        private void AssignedToChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            Status = MessageStatuses.Pending;
+        }
 
         IObjectSpace IObjectSpaceLink.ObjectSpace
         {

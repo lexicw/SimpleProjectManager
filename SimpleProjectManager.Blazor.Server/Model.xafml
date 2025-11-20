@@ -19,7 +19,7 @@
       <Item Id="Default">
         <Items>
           <Item Id="Message_ListView" ImageName="Glyph_Mail" Index="0" />
-          <Item Id="Employee" Index="1" ViewId="Employee_ListView" IsNewNode="True" />
+          <Item Id="Employee" Index="1" ViewId="Employee_ListView" ImageName="BO_Employee" IsNewNode="True" />
           <Item Id="Employee_ListView" Removed="True" />
         </Items>
       </Item>
