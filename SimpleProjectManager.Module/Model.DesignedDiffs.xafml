@@ -15,6 +15,21 @@
         <SortProperty Id="IDSort" Direction="Descending" PropertyName="id" Index="0" IsNewNode="True" />
       </Sorting>
     </ListView>
+    <DetailView Id="Employee_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="Employee" RelativeSize="100">
+              <LayoutItem Id="FirstName" RelativeSize="5.298013245033113" />
+              <LayoutItem Id="LastName" RelativeSize="3.9735099337748343" />
+              <LayoutItem Id="Color" RelativeSize="3.9735099337748343" />
+              <LayoutItem Id="FullName" RelativeSize="86.75496688741723" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="AssignedMessages_Group" Removed="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
     <DetailView Id="Message_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">

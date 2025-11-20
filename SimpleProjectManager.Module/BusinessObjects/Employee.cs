@@ -9,6 +9,7 @@ using System.Drawing;
 namespace SimpleProjectManager.Module.BusinessObjects
 {
     [DefaultProperty(nameof(FullName))]
+    [DefaultClassOptions]
     public class Employee : IXafEntityObject, IObjectSpaceLink
     {
         protected IObjectSpace ObjectSpace;

@@ -59,12 +59,14 @@ public class SimpleProjectManagerEFCoreDbContext : DbContext
         modelBuilder.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues);
         modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
 
-        modelBuilder.Entity<Employee>()
-        .Property(e => e.Color)
-        .HasConversion<ColorToInt32Converter>();
+        var colorConverter = new ValueConverter<Color?, int?>(
+            c => c.HasValue ? c.Value.ToArgb() : (int?)null,
+            v => v.HasValue ? Color.FromArgb(v.Value) : (Color?)null
+        );
 
-        modelBuilder.Entity<Message>()
-        .HasMany(x => x.AssignedTo)
-        .WithMany(x => x.AssignedMessages);
+        modelBuilder.Entity<Employee>()
+            .Property(e => e.Color)
+            .HasConversion(colorConverter);
+
     }
 }
