@@ -37,7 +37,7 @@ namespace SimpleProjectManager.Module.Migrations
 
                     b.HasIndex("TestimonialsID");
 
-                    b.ToTable("CustomerTestimonial");
+                    b.ToTable("CustomerTestimonial", (string)null);
                 });
 
             modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.MediaDataObject", b =>
@@ -56,7 +56,7 @@ namespace SimpleProjectManager.Module.Migrations
 
                     b.HasIndex("MediaResourceID");
 
-                    b.ToTable("MediaDataObject");
+                    b.ToTable("MediaDataObject", (string)null);
                 });
 
             modelBuilder.Entity("DevExpress.Persistent.BaseImpl.EF.MediaResourceObject", b =>
@@ -70,7 +70,7 @@ namespace SimpleProjectManager.Module.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("MediaResourceObject");
+                    b.ToTable("MediaResourceObject", (string)null);
                 });
 
             modelBuilder.Entity("SimpleProjectManager.Module.BusinessObjects.Customer", b =>
@@ -111,7 +111,7 @@ namespace SimpleProjectManager.Module.Migrations
 
                     b.HasIndex("PhotoID");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("SimpleProjectManager.Module.BusinessObjects.Employee", b =>
@@ -133,7 +133,7 @@ namespace SimpleProjectManager.Module.Migrations
 
                     b.HasIndex("Messageid");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("SimpleProjectManager.Module.BusinessObjects.Message", b =>
@@ -169,7 +169,7 @@ namespace SimpleProjectManager.Module.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("SimpleProjectManager.Module.BusinessObjects.Project", b =>
@@ -192,7 +192,7 @@ namespace SimpleProjectManager.Module.Migrations
 
                     b.HasIndex("ManagerID");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("SimpleProjectManager.Module.BusinessObjects.ProjectTask", b =>
@@ -232,7 +232,7 @@ namespace SimpleProjectManager.Module.Migrations
 
                     b.HasIndex("ProjectID");
 
-                    b.ToTable("ProjectTasks");
+                    b.ToTable("ProjectTasks", (string)null);
                 });
 
             modelBuilder.Entity("SimpleProjectManager.Module.BusinessObjects.Testimonial", b =>
@@ -255,7 +255,7 @@ namespace SimpleProjectManager.Module.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Testimonials");
+                    b.ToTable("Testimonials", (string)null);
                 });
 
             modelBuilder.Entity("CustomerTestimonial", b =>

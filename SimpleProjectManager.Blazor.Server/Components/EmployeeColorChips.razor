@@ -1,0 +1,30 @@
+﻿@using DevExpress.ExpressApp.Blazor.Editors
+@using Microsoft.AspNetCore.Components
+@using SimpleProjectManager.Module.BusinessObjects
+@using System.Drawing
+
+<div class="assigned-to-chips">
+    @if (ViewItem?.CurrentObject is Message message)
+    {
+        if (message.AssignedTo == null || message.AssignedTo.Count == 0)
+        {
+        }
+        else
+        {
+            foreach (var emp in message.AssignedTo)
+            {
+                // Handle nullable Color?
+                var c = emp.Color ?? Color.Gray;
+                var cssColor = $"#{c.R:X2}{c.G:X2}{c.B:X2}";
+
+                <span class="employee-color-chip" style="background-color:@cssColor">
+                    @emp.FullName
+                </span>
+            }
+        }
+    }
+</div>
+
+@code {
+    [CascadingParameter] public BlazorControlViewItem? ViewItem { get; set; }
+}

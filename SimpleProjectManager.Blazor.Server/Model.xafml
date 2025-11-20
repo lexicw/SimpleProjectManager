@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application>
   <BOModel>
+    <Class Name="SimpleProjectManager.Module.BusinessObjects.Employee">
+      <OwnMembers>
+        <Member Name="Color" DisplayFormat="{0}" />
+      </OwnMembers>
+    </Class>
     <Class Name="SimpleProjectManager.Module.BusinessObjects.Message">
       <OwnMembers>
         <Member Name="AssignedTo" PropertyEditorType="DevExpress.ExpressApp.Blazor.Editors.TagBoxListPropertyEditor" />
@@ -12,7 +17,8 @@
     <Items>
       <Item Id="Default">
         <Items>
-          <Item Id="Message_ListView" ImageName="Glyph_Mail" />
+          <Item Id="Message_ListView" ImageName="Glyph_Mail" Index="0" />
+          <Item Id="Employee" Index="1" ViewId="Employee_ListView" IsNewNode="True" />
         </Items>
       </Item>
       <Item Id="Marketing">
@@ -27,25 +33,42 @@
   </SchemaModules>
   <Views DefaultListEditor="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor">
     <DetailView Id="Message_DetailView">
+      <Items>
+        <PropertyEditor Id="AssignedTo" Index="0" />
+        <PropertyEditor Id="Company" Index="1" />
+        <PropertyEditor Id="CreatedOn" Index="2" />
+        <PropertyEditor Id="Email" Index="3" />
+        <PropertyEditor Id="MessageBody" Index="4" />
+        <PropertyEditor Id="RowVersion" Index="5" />
+        <PropertyEditor Id="Status" Index="6" />
+        <PropertyEditor Id="Subject" Index="7" />
+        <ControlDetailItem Id="AssignedToChips" Index="8" Caption="" ControlTypeName="SimpleProjectManager.Blazor.Server.Components.EmployeeColorChips" IsNewNode="True" />
+      </Items>
       <Layout>
         <LayoutGroup Id="Main">
-          <LayoutGroup Id="SimpleEditors" RelativeSize="34.10596026490066">
-            <LayoutGroup Id="Message" RelativeSize="85.4368932038835">
-              <LayoutGroup Id="Message_col1" RelativeSize="49.84472049689441">
-                <LayoutItem Id="Subject" RelativeSize="22.377622377622377" />
-                <LayoutItem Id="Email" RelativeSize="16.783216783216783" />
-                <LayoutItem Id="Company" RelativeSize="60.83916083916084" />
+          <LayoutGroup Id="SimpleEditors" RelativeSize="24.503311258278146">
+            <LayoutGroup Id="Message" RelativeSize="100">
+              <LayoutGroup Id="Message_col1" RelativeSize="49.685534591194966">
+                <LayoutItem Id="Subject" RelativeSize="28.571428571428573" />
+                <LayoutItem Id="Email" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="Company" RelativeSize="50" />
               </LayoutGroup>
-              <LayoutGroup Id="Message_col2" RelativeSize="50.15527950310559">
-                <LayoutItem Id="Status" RelativeSize="22.377622377622377" />
-                <LayoutItem Id="CreatedOn" RelativeSize="16.783216783216783" />
-                <LayoutItem Id="AssignedTo" ViewItem="AssignedTo" Index="2" RelativeSize="60.83916083916084" IsNewNode="True" />
+              <LayoutGroup Id="Message_col2" RelativeSize="50.314465408805034">
+                <LayoutItem Id="Status" RelativeSize="28.571428571428573" />
+                <LayoutItem Id="CreatedOn" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="AssignedTo" ViewItem="AssignedTo" Index="2" RelativeSize="21.428571428571427" IsNewNode="True" />
+                <LayoutItem Id="AssignedToChips" ViewItem="AssignedToChips" Index="3" RelativeSize="28.571428571428573" IsNewNode="True" />
               </LayoutGroup>
             </LayoutGroup>
           </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" RelativeSize="75.49668874172185" />
         </LayoutGroup>
       </Layout>
     </DetailView>
-    <ListView Id="Message_ListView" DataAccessMode="Server" PageSize="20" ShowSelectionColumn="True" InlineEditMode="PopupEditForm" VirtualScrollingEnabled="True" FreezeColumnIndices="False" />
+    <ListView Id="Message_ListView" DataAccessMode="Server" PageSize="20" ShowSelectionColumn="True" InlineEditMode="PopupEditForm" VirtualScrollingEnabled="True" FreezeColumnIndices="False">
+      <Columns>
+        <ColumnInfo Id="Assigned To" PropertyEditorType="DevExpress.ExpressApp.Editors.ListPropertyEditor" />
+      </Columns>
+    </ListView>
   </Views>
 </Application>

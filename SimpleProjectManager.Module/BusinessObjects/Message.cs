@@ -14,6 +14,7 @@ using DevExpress.ExpressApp.ConditionalAppearance;
 using DevExpress.Xpo;
 using System.ComponentModel.DataAnnotations.Schema;
 using DevExpress.ExpressApp.Editors;
+using System.Drawing;
 
 namespace SimpleProjectManager.Module.BusinessObjects
 {

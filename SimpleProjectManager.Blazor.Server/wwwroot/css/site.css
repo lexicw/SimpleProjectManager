@@ -29,3 +29,19 @@ app {
     height: 100%;
     z-index: 100001;
 }
+
+.employee-color-chip {
+    display: inline-block;
+    /*    width: 15px;
+    height: 15px;*/
+    color: #fff;
+    font-size: 14px;
+    white-space: nowrap;
+    border-radius: 14px;
+    padding: 2px 8px;
+    margin-right: 4px;
+}
+
+.assigned-to-chips {
+    margin-top: 4px;
+}

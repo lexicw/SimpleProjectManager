@@ -44,6 +44,7 @@
     <ListView Id="Message_ListView" AllowEdit="False" AllowLink="False" AllowUnlink="False" DataAccessMode="Client" FreezeColumnIndices="False">
       <Columns>
         <ColumnInfo Id="Subject" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="AssignedTo" PropertyName="AssignedTo" IsNewNode="True" />
         <ColumnInfo Id="MessageBody" Removed="True" />
       </Columns>
       <Sorting>
