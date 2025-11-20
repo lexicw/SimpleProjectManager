@@ -62,5 +62,9 @@ public class SimpleProjectManagerEFCoreDbContext : DbContext
         modelBuilder.Entity<Employee>()
         .Property(e => e.Color)
         .HasConversion<ColorToInt32Converter>();
+
+        modelBuilder.Entity<Message>()
+        .HasMany(x => x.AssignedTo)
+        .WithMany(x => x.AssignedMessages);
     }
 }
