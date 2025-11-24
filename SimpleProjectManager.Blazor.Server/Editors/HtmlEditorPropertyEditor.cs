@@ -14,7 +14,6 @@ namespace SimpleProjectManager.Blazor.Server.Editors
         public const string HtmlEmailEditor = "HtmlEmailEditor";
     }
 
-    // Note the alias in the attribute ↓
     [PropertyEditor(typeof(string), false)]
     public class HtmlEditorPropertyEditor : BlazorPropertyEditorBase
     {

@@ -19,17 +19,30 @@
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">
           <LayoutGroup Id="SimpleEditors" RelativeSize="100">
-            <LayoutGroup Id="Employee" RelativeSize="100">
-              <LayoutItem Id="FirstName" RelativeSize="5.298013245033113" />
-              <LayoutItem Id="LastName" RelativeSize="3.9735099337748343" />
-              <LayoutItem Id="Color" RelativeSize="3.9735099337748343" />
-              <LayoutItem Id="FullName" RelativeSize="86.75496688741723" />
+            <LayoutGroup Id="Employee" RelativeSize="100" Direction="Horizontal">
+              <LayoutGroup Id="Employee_col1" ShowCaption="False" Index="0" RelativeSize="49.924585218702866" IsNewNode="True" Removed="True">
+                <LayoutItem Id="FirstName" ViewItem="FirstName" Index="0" RelativeSize="5.298013245033113" IsNewNode="True" />
+                <LayoutItem Id="LastName" ViewItem="LastName" Index="1" RelativeSize="94.70198675496688" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Employee_col2" ShowCaption="False" Caption="Employee_col2" Index="1" RelativeSize="50.075414781297134" IsNewNode="True">
+                <LayoutItem Id="FullName" ViewItem="FullName" Index="0" RelativeSize="5.298013245033113" IsNewNode="True" />
+                <LayoutItem Id="Color" ViewItem="Color" Index="1" RelativeSize="94.70198675496688" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Color" Index="2" RelativeSize="63.34841628959276" Removed="True" />
+              <LayoutItem Id="LastName" Index="2" RelativeSize="22.3841059602649" Removed="True" />
+              <LayoutItem Id="FullName" Index="3" RelativeSize="26.244343891402714" Removed="True" />
+              <LayoutItem Id="FirstName" Removed="True" />
             </LayoutGroup>
           </LayoutGroup>
           <LayoutGroup Id="AssignedMessages_Group" Removed="True" />
         </LayoutGroup>
       </Layout>
     </DetailView>
+    <ListView Id="Employee_ListView">
+      <Columns>
+        <ColumnInfo Id="ColorHex" Caption="Color" />
+      </Columns>
+    </ListView>
     <DetailView Id="Message_DetailView">
       <Layout>
         <LayoutGroup Id="Main" RelativeSize="100">

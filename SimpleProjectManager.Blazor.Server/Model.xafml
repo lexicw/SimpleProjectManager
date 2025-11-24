@@ -3,7 +3,7 @@
   <BOModel>
     <Class Name="SimpleProjectManager.Module.BusinessObjects.Employee">
       <OwnMembers>
-        <Member Name="Color" DisplayFormat="{0}" />
+        <Member Name="Color" DisplayFormat="{0}" PropertyEditorType="SimpleProjectManager.Blazor.Server.Editors.ColorPalettePropertyEditor" />
       </OwnMembers>
     </Class>
     <Class Name="SimpleProjectManager.Module.BusinessObjects.Message">

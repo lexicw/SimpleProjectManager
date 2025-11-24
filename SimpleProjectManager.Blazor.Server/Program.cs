@@ -39,16 +39,16 @@ public class Program : IDesignTimeApplicationFactory {
             }
             else {
                 // Message Simulator
-                using (var scope = host.Services.CreateScope())
-                {
-                    var services = scope.ServiceProvider;
-                    var scopeFactory = services.GetRequiredService<IServiceScopeFactory>();
-                    var lifetime = services.GetRequiredService<IHostApplicationLifetime>();
+                //using (var scope = host.Services.CreateScope())
+                //{
+                //    var services = scope.ServiceProvider;
+                //    var scopeFactory = services.GetRequiredService<IServiceScopeFactory>();
+                //    var lifetime = services.GetRequiredService<IHostApplicationLifetime>();
 
-                    // fire-and-forget; it will stop when the app stops
-                    _ = MessageSimulator.StartAsync(scopeFactory, lifetime.ApplicationStopping);
-                    Console.WriteLine("✅ MessageSimulator (ObjectSpace, per-iteration scope) started…");
-                }
+                //    // fire-and-forget; it will stop when the app stops
+                //    _ = MessageSimulator.StartAsync(scopeFactory, lifetime.ApplicationStopping);
+                //    Console.WriteLine("✅ MessageSimulator (ObjectSpace, per-iteration scope) started…");
+                //}
                 // END SIMULATOR
 
                 host.Run();

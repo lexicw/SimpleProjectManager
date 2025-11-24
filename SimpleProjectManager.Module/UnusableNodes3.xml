@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="Employee_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Employee">
+              <LayoutGroup Id="Employee_col2" ShowCaption="False" Index="1" RelativeSize="50.07849293563579" Removed="True" />
+              <LayoutGroup Id="Autoda4315fb-6192-4439-ab55-ac9a47a82cda">
+                <LayoutItem Id="ColorHex" ViewItem="ColorHex" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

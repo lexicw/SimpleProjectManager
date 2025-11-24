@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="Employee_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Employee">
+              <LayoutItem Id="FirstName" RelativeSize="5.298013245033113" />
+              <LayoutItem Id="LastName" RelativeSize="3.9735099337748343" />
+              <LayoutItem Id="Color" RelativeSize="3.9735099337748343" />
+              <LayoutItem Id="FullName" RelativeSize="86.75496688741723" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

@@ -1,0 +1,71 @@
+﻿@using DevExpress.Blazor
+@using Microsoft.AspNetCore.Components
+
+<style>
+    .dropdown-icon-color-background {
+        background-color: @Value;
+    }
+
+    .dropdown-template-color-palette {
+        border-width: 0px;
+    }
+</style>
+
+<DxDropDownBox @bind-Value="_internalValue"
+               QueryDisplayText="@QueryText"
+               NullText="Select color..."
+               CssClass="cw-240">
+    <DropDownBodyTemplate>
+        <DxColorPalette Value="@GetColorDropDownValue(context.DropDownBox)"
+                        ValueChanged="@((string v) => ColorDropDownValueChanged(v, context.DropDownBox))"
+                        CssClass="dropdown-template-color-palette" />
+    </DropDownBodyTemplate>
+    <EditBoxDisplayTemplate>
+        <div class="template-container">
+            <span class="dxbl-image dropdown-icon-color dropdown-icon-color-background"></span>
+            <DxInputBox />
+        </div>
+    </EditBoxDisplayTemplate>
+</DxDropDownBox>
+
+@code {
+    // 👇 These are what the Property Editor will bind to
+    [Parameter] public string? Value { get; set; }
+    [Parameter] public EventCallback<string?> ValueChanged { get; set; }
+
+    // DxDropDownBox's Value is object, so we adapt it here
+    private object? _internalValue
+    {
+        get => Value;
+        set
+        {
+            var s = value as string;
+            if (Value != s)
+            {
+                Value = s;
+                ValueChanged.InvokeAsync(s);
+            }
+        }
+    }
+
+    string GetColorDropDownValue(IDropDownBox dropDownBox)
+    {
+        return dropDownBox.Value as string ?? Value ?? "#66CDFF";
+    }
+
+    async void ColorDropDownValueChanged(string value, IDropDownBox dropDownBox)
+    {
+        dropDownBox.BeginUpdate();
+        dropDownBox.Value = value;
+        dropDownBox.DropDownVisible = false;
+        dropDownBox.EndUpdate();
+
+        _internalValue = value;
+        await ValueChanged.InvokeAsync(value);
+    }
+
+    string QueryText(DropDownBoxQueryDisplayTextContext arg)
+    {
+        return arg.Value as string ?? string.Empty;
+    }
+}

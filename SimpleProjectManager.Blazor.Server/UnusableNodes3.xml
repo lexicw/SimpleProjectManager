@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel Id="BOModel">
+    <Class Name="SimpleProjectManager.Module.BusinessObjects.Employee">
+      <OwnMembers Id="OwnMembers">
+        <Member Name="ColorHex" PropertyEditorType="SimpleProjectManager.Blazor.Server.Editors.ColorPalettePropertyEditor" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+</Application>

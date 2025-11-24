@@ -45,14 +45,12 @@
         if (ViewItem?.CurrentObject is not Message message)
             return;
 
-        // 1) If the current Message itself changed (incl. its relations)
         if (ReferenceEquals(e.Object, message))
         {
             InvokeAsync(StateHasChanged);
             return;
         }
 
-        // 2) If an Employee that belongs to AssignedTo changed
         if (e.Object is Employee emp &&
             message.AssignedTo != null &&
             message.AssignedTo.Contains(emp))
@@ -61,8 +59,6 @@
             return;
         }
 
-        // --- If this still doesn't fire, as a brute-force test:
-        // InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()
