@@ -2,10 +2,6 @@
 @using Microsoft.AspNetCore.Components
 
 <style>
-    .dropdown-icon-color-background {
-        background-color: @Value;
-    }
-
     .dropdown-template-color-palette {
         border-width: 0px;
     }
@@ -22,18 +18,26 @@
     </DropDownBodyTemplate>
     <EditBoxDisplayTemplate>
         <div class="template-container">
-            <span class="dxbl-image dropdown-icon-color dropdown-icon-color-background"></span>
+            <span class="dxbl-image dropdown-icon-color"
+                  style="
+                  display:inline-block;
+                  width:18px;
+                  height:18px;
+                  border-radius:3px;
+                  border:1px solid #ccc;
+                  background-color:@((_internalValue as string) ?? Value ?? "#66CDFF");
+                  margin-right:4px;
+                  vertical-align:middle;">
+            </span>
             <DxInputBox />
         </div>
     </EditBoxDisplayTemplate>
 </DxDropDownBox>
 
 @code {
-    // 👇 These are what the Property Editor will bind to
     [Parameter] public string? Value { get; set; }
     [Parameter] public EventCallback<string?> ValueChanged { get; set; }
 
-    // DxDropDownBox's Value is object, so we adapt it here
     private object? _internalValue
     {
         get => Value;

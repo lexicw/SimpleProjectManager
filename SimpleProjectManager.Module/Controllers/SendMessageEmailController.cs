@@ -86,8 +86,8 @@ namespace SimpleProjectManager.Module.Blazor.Controllers
 
             const string host = "localhost";
             const int port = 25;
-            const string fromAddr = "no-reply@yourapp.local";
-            const string fromName = "Your App";
+            const string fromAddr = "lwheeler@theamegroup.com";
+            const string fromName = "Lexi Wheeler";
 
             try
             {
